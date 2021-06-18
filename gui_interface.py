@@ -33,9 +33,6 @@ class Validate:
         self.b2 = Button(mastery, text="Clear", command=self.clr).place(x=140, y=210)
         self.entry3.insert(0, "address@mydomain.com")
 
-
-
-
     def clr(self):
         self.entry1.delete(0, END)
         self.entry2.delete(0, END)
