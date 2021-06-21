@@ -6,15 +6,16 @@ from email_validator import validate_email, EmailNotValidError
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from playsound import playsound
 
 
 root = Tk()
 root.geometry("450x500")
 root.title("Welcome to Lotto SA")
+root.config(bg="yellow")
 
 
 class Validate:
-
     def __init__(self, mastery):
         self.name_label = Label(mastery, text="Enter your name:")
         self.name_label.place(x=80, y=5)
@@ -33,16 +34,10 @@ class Validate:
         self.b2 = Button(mastery, text="Clear", command=self.clr).place(x=140, y=210)
         self.entry3.insert(0, "address@mydomain.com")
 
-    def clr(self):
-        self.entry1.delete(0, END)
-        self.entry2.delete(0, END)
-        self.entry3.delete(0, END)
-        self.entry4.delete(0, END)
-
     def id_val(self):
         id_number = rsaidnumber.parse(self.entry2.get())
         age = ((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
-        email = "my+address@mydomain.tld"
+        email = "my+address@mydomain.com"
         if age >= 18:
             messagebox.showinfo("Let's play")
         else:
@@ -79,17 +74,27 @@ class Validate:
 
         my_file = open("mytext.txt", 'a')
         my_file.write('\n')
-        my_file.write(self.entry1.get())
+        my_file.write("Username: " + self.entry1.get())
         my_file.write('\n')
-        my_file.write(self.entry2.get())
+        my_file.write("Identity Number: " + self.entry2.get())
         my_file.write('\n')
-        my_file.write(self.entry3.get())
+        my_file.write("Email: " + self.entry3.get())
         my_file.write('\n')
-        my_file.write(self.entry4.get())
+        my_file.write("Address: " + self.entry4.get())
         my_file.write('\n')
-        my_file.write(player_id)
+        my_file.write("id_player "+player_id)
         my_file.write('\n')
         my_file.close()
+        root.destroy()
+        import pick_numbers_genarate
+
+    def clr(self):
+        self.entry1.delete(0, END)
+        self.entry2.delete(0, END)
+        self.entry3.delete(0, END)
+        self.entry4.delete(0, END)
+
+
 
 
 img = PhotoImage(file="lotto.png")
@@ -97,6 +102,7 @@ canvas = Canvas(root, width=250, height=200)
 canvas.create_image(0, 0, anchor=NW, image=img)
 canvas.place(x=100, y=250)
 
+playsound("Heavens Choir Sound Effect (mp3cut.net).mp3")
 
 x = Validate(root)
 root.mainloop()

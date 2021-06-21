@@ -3,13 +3,14 @@ import random
 from tkinter import messagebox
 
 root = Tk()
-root.geometry("500x500")
+root.geometry("500x600")
 root.title("Welcome to Lotto SA")
+root.config(bg="yellow")
 
 img = PhotoImage(file="lotto2.png")
 canvas = Canvas(root, width=350, height=150)
 canvas.create_image(0, 0, anchor=NW, image=img)
-canvas.place(x=60, y=10)
+canvas.place(x=70, y=10)
 
 
 class NumberPicker:
@@ -34,16 +35,13 @@ class NumberPicker:
     row3_num5 = StringVar()
     row3_num6 = StringVar()
 
-
-
-    # display label variables
     List1 = []
     List2 = []
     List3 = []
 
     def __init__(self, mastery):
         self.counter = 1
-        self.sub_content = Label(mastery, text="Enter your 6 numbers down below from 1-49 ")
+        self.sub_content = Label(mastery, text="Enter your 6 numbers down below from 1-49 ", foreground="blue")
         self.sub_content.place(x=120, y=200)
         self.spin1 = Spinbox(mastery, from_=1, to=49, width=5)
         self.spin1.place(x=10, y=250)
@@ -102,11 +100,15 @@ class NumberPicker:
         self.btn = Button(mastery, text="Press to confirm set!", foreground="blue", border="1", command=self.pick_set)
         self.btn.place(x=330, y=310)
         self.btn1 = Button(mastery, text="Play", foreground="blue", command=self.random_numbers)
-        self.btn1.place(x=350, y=350)
-        self.btn2 = Button(mastery, text="Claim Prize", foreground="blue", )
-        self.btn2.place(x=350, y=390)
-        self.btn2 = Button(mastery, text="Play again?", foreground="blue", command=self.clr)
-        self.btn2.place(x=350, y=430)
+        self.btn1.place(x=330, y=350)
+        self.btn2 = Button(mastery, text="Claim Prize", foreground="blue", command=self.prize,)
+        self.btn2.place(x=50, y=500)
+        self.btn2.config(state="disabled")
+        self.btn3 = Button(mastery, text="Play again?", foreground="blue", command=self.clr)
+        self.btn3.place(x=180, y=500)
+        self.btn4 = Button(mastery, text="Currency Convertor", foreground ="blue", command=self.current_con)
+        self.btn4.place(x=300, y=500)
+        self.btn4.config(state="disabled")
 
     def pick_set(self):
         if self.counter == 1:
@@ -196,6 +198,14 @@ class NumberPicker:
         messagebox.showinfo("Status", "You had:" + str(y) + "correct")
         messagebox.showinfo("Winnings ", "You have won R" + str(win))
 
+        number = open("mytext.txt", "a")
+        number.write('\n')
+        number.write("Lotto draw: " + str(self.anything.get()))
+        number.write('\n')
+        number.write("Prize money: "+str(win))
+        self.btn2.config(state="normal")
+        self.btn4.config(state="normal")
+
     def clr(self):
         self.spin1.delete(0, END)
         self.spin2.delete(0, END)
@@ -228,6 +238,14 @@ class NumberPicker:
         self.row3_num5.set("")
         self.row3_num6.set("")
         self.display_num.configure(text="")
+
+    def current_con(self):
+        root.destroy()
+        import currency_convert
+
+    def prize(self):
+        root.destroy()
+        import winnings
 
 
 x = NumberPicker(root)

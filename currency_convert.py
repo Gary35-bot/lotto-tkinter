@@ -37,20 +37,19 @@ currency_cb['state'] = 'readonly'
 currency_cb.set('Select Currency')
 currency_cb.place(x=10, y=280)
 
-amount_label = Label (root, text='Enter Amount:', bg='purple').place(x=65, y=330)
+amount_label = Label(root, text='Pre-Entered Amount:', bg='purple').place(x=60, y=330)
 ent1 = Entry(root, bg='white')
 ent1.place(x=200, y=330)
-ent1.focus()
-converted_label=Label(root, text='Converted Amount:', bg='purple').place(x=65, y=380)
-text_label=Label(root, text='', textvariable=results).place(x=200, y=380)
-
+converted_label = Label(root, text='Converted Amount:', bg='purple').place(x=65, y=380)
+text_label = Label(root, text='', textvariable=results).place(x=200, y=380)
 
 def convert(to_currency, amount):
-    amount = round(amount * conversion_rates[to_currency], 4)
+
+    amount = round(amount * conversion_rates[to_currency])
     return amount
 
 
-def perform():
+def transform():
     try:
         amount = float(ent1.get())
         to_curr = currency_cb.get()
@@ -68,8 +67,9 @@ def perform():
         messagebox.showerror('ERROR!', 'Select Type of Currency')
 
 
-def killer():
-    return root.destroy()
+def money():
+    root.destroy()
+    import winnings
 
 
 def clear():
@@ -79,8 +79,14 @@ def clear():
     results.set('')
 
 
-Button(root, text="Convert", bg='purple', command=perform).place(x=180, y=430)
-Button(root, text="Exit", bg='white', command=killer).place(x=281, y=480)
-Button(root, text="Clear", bg='white', command=clear).place(x=100, y=480)
+
+
+b1 = Button(root, text="Convert", bg='purple', command=transform)
+b1.place(x=180, y=480)
+b2 = Button(root, text="Clear", bg='white', command=clear)
+b2.place(x=100, y=480)
+b3 = Button(root, text="Claim", foreground="purple", command="money")
+b3.place(x=280, y=480)
+
 
 root.mainloop()
