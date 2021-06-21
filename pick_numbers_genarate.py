@@ -7,12 +7,13 @@ root.geometry("500x600")
 root.title("Welcome to Lotto SA")
 root.config(bg="yellow")
 
+# image
 img = PhotoImage(file="lotto2.png")
 canvas = Canvas(root, width=350, height=150)
 canvas.create_image(0, 0, anchor=NW, image=img)
 canvas.place(x=70, y=10)
 
-
+# class for the whole tkinter and functions
 class NumberPicker:
     # String variables
     anything = StringVar()
@@ -35,7 +36,7 @@ class NumberPicker:
     row3_num5 = StringVar()
     row3_num6 = StringVar()
 
-    List1 = []
+    List1 = [] # created three empty list for picking numbers
     List2 = []
     List3 = []
 
@@ -110,7 +111,7 @@ class NumberPicker:
         self.btn4.place(x=300, y=500)
         self.btn4.config(state="disabled")
 
-    def pick_set(self):
+    def pick_set(self): # displays number in spin boxes
         if self.counter == 1:
             self.row1_num1.set(self.spin1.get())
             self.row1_num2.set(self.spin2.get())

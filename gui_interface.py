@@ -14,7 +14,7 @@ root.geometry("450x500")
 root.title("Welcome to Lotto SA")
 root.config(bg="yellow")
 
-
+# class for tkinter (OOP)
 class Validate:
     def __init__(self, mastery):
         self.name_label = Label(mastery, text="Enter your name:")
@@ -34,7 +34,7 @@ class Validate:
         self.b2 = Button(mastery, text="Clear", command=self.clr).place(x=140, y=210)
         self.entry3.insert(0, "address@mydomain.com")
 
-    def id_val(self):
+    def id_val(self): # validates id
         id_number = rsaidnumber.parse(self.entry2.get())
         age = ((datetime.today() - id_number.date_of_birth) // timedelta(days=365.25))
         email = "my+address@mydomain.com"
@@ -96,7 +96,7 @@ class Validate:
 
 
 
-
+# image for login screen
 img = PhotoImage(file="lotto.png")
 canvas = Canvas(root, width=250, height=200)
 canvas.create_image(0, 0, anchor=NW, image=img)

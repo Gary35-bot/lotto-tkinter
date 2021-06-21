@@ -30,7 +30,7 @@ currency = []
 for i in conversion_rates.keys():
     currency.append(i)
 
-
+# selecting  currency
 currency_cb = ttk.Combobox(root)
 currency_cb['values'] = currency
 currency_cb['state'] = 'readonly'
@@ -48,7 +48,7 @@ def convert(to_currency, amount):
     amount = round(amount * conversion_rates[to_currency])
     return amount
 
-
+# functions
 def transform():
     try:
         amount = float(ent1.get())
@@ -80,12 +80,13 @@ def clear():
 
 
 
+# buttons for the currency converter
 
 b1 = Button(root, text="Convert", bg='purple', command=transform)
 b1.place(x=180, y=480)
 b2 = Button(root, text="Clear", bg='white', command=clear)
 b2.place(x=100, y=480)
-b3 = Button(root, text="Claim", foreground="purple", command="money")
+b3 = Button(root, text="Claim", foreground="purple", command=money)
 b3.place(x=280, y=480)
 
 

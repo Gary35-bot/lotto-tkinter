@@ -48,7 +48,7 @@ class Personal:
         self.exit_button = Button(root, text="Exit", foreground="blue", command=root.destroy)
         self.exit_button.place(x=350, y=480)
 
-    def acc_number(self):
+    def acc_number(self): # sends email to user
         try:
             int(self.account_entry.get())
         except ValueError:
